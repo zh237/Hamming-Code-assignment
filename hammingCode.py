@@ -1,38 +1,44 @@
 import numpy as np
+import math
 from functools import reduce
 
+"""
+For error detection, redundant bits are added to the current information to create hamming-code.
+The efficency increase with larger data, but remeber, hamming code can only detect up to 2 error and up to 1 error can be found and fixed.
+(This is extended hamming-code(8,4) )
+"""
+class HammingCode:
+    def __init__(self, message):
+        self.data = message
 
-class hammingCode:
-    def __init__(self, data):
-        self.data = data
-        # self.code = createCode()
-
-    def createCode(self):
-        if (isinstance(self.data, (list, tuple, np.ndarray))):
-            pass
-
+    def toBinary(self):
+        if (isinstance(self.data, np.ndarray)):
+            self.binary = self.data.tolist()
+            
+        if (isinstance(list, tuple)):
+            self.binary = self.data
+        
         if (isinstance(self.data, str)):
-            self.code = "".join(format(i, 'b')
+            self.binary = "".join(format(i, 'b')
                                 for i in bytearray(self.data, "utf8"))
             # each character will be represented using 7
-            print(self.code)
-            print(len(self.code))
 
-        size = len(self.data)
-        i = 1
-        while (i**2 < size):
-            i = i*2
-        pos = (reduce (lambda x, y: x^y , [i for i, bit in enumerate(self.data) if bit]))
-        binaryRep = format(pos, 'b')
-        print ("num : {} , Binary : {} ".format(pos, binaryRep))
-        print(len(binaryRep))
-        if (len(binaryRep) < i):
-            s = ""
-            for j in range(0, i-len(binaryRep)):
-                print("0")
+    def createCode(self):
+        # Block length : 2**r  where r >= 2
+        message_len = len( self.binary )
+        r = 1
+        while (2**r < message_len + r + 1 ):
+            r+=1
+        self.binary.insert(0,0)
+        for i in range(1, message_len + r + 1 ):
+            if ( math.log(i,2) == math.ceil(math.log(i,2)) ):
+                self.binary.insert(i,0)
+        print (self.binary)
 
     def checkSize(self):
         return 1
 
     def findError(self):
-        return 1
+        pos = (reduce (lambda x, y: x^y , [i for i, bit in enumerate(self.binary) if bit]))
+        binaryRep = format(pos, 'b')
+        print ("num : {} , Binary : {} ".format(pos, binaryRep))
