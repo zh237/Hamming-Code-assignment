@@ -18,14 +18,14 @@ class HammingCode:
             self.data = message
   
 
-    def toBinary(self):
+    def to_binary_list(self):
         if (isinstance(self.data, np.ndarray)):
             self.binary = self.data.tolist()
-            
-        if (isinstance(list, tuple)):
+              
+        elif (isinstance(self.data,list)):
             self.binary = self.data
         
-        if (isinstance(self.data, str)):
+        elif (isinstance(self.data, str)):
             binary_in_string = "".join(format(i, 'b')
                                 for i in bytearray(self.data, "utf8"))
             templist = []
@@ -34,7 +34,7 @@ class HammingCode:
             self.binary = templist
 
     def createCode(self):
-        self.toBinary()
+        self.to_binary_list()
     
         # Block length : 2**r  where r >= 2
         message_len = len( self.binary )
