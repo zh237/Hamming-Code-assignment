@@ -8,8 +8,12 @@ The efficency increase with larger data, but remeber, hamming code can only dete
 (This is extended hamming-code(8,4) )
 """
 class HammingCode:
-    def __init__(self, message):
-        self.data = message
+    def __init__(self, message, forChecking):
+        if (forChecking):
+            self.binary = message
+        else:
+            self.data = message
+  
 
     def toBinary(self):
         if (isinstance(self.data, np.ndarray)):
@@ -29,14 +33,23 @@ class HammingCode:
         r = 1
         while (2**r < message_len + r + 1 ):
             r+=1
+        print (r)
+         
         self.binary.insert(0,0)
         for i in range(1, message_len + r + 1 ):
             if ( math.log(i,2) == math.ceil(math.log(i,2)) ):
                 self.binary.insert(i,0)
         print (self.binary)
-
-    def checkSize(self):
-        return 1
+        print (len(self.binary))
+        
+        for i in range(0,r):
+            x = 2**i
+            for j in range(1,len(self.binary)):
+                if ( ((j>>i)&1)==1  ):
+                    if (x!=j):
+                        self.binary[x] = self.binary[x]^self.binary[j]
+        print (self.binary)
+        print (len(self.binary))
 
     def findError(self):
         pos = (reduce (lambda x, y: x^y , [i for i, bit in enumerate(self.binary) if bit]))
