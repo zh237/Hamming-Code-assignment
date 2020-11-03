@@ -1,1 +1,1 @@
-# Humming-Code
+# Hamming-Code
