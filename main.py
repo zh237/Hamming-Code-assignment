@@ -6,13 +6,12 @@ import math
 """ 
 This file is used to show case the use of hammingCode. 
 """
-
 def testHammingCode(message, index_to_create_error):
     code = HammingCode(message, False) 
-    code.createCode()
+    code.encode()
 
     # since we have just created the code, there should not be any errors
-    code.findError() 
+    code.checkForError() 
 
     testcode = code.getCode()
     # create an error manually. 
@@ -20,12 +19,12 @@ def testHammingCode(message, index_to_create_error):
     if (testcode[indexToChange] == 1):
       testcode[indexToChange] = 0
     else:
-     testcode[indexToChange] = 1
+      testcode[indexToChange] = 1
     
     code = HammingCode(testcode,True)
 
     # Should print the value of "indexToChange"
-    code.findError()
+    code.checkForError()
 
 
 ###  Test case 1 :
