@@ -21,4 +21,4 @@ checkForError()
 parity bits are needed for every 2*i bits. Meaning that the efficiency increases with larger the data.
 
 ### For deeper explanation check out this youtube video (not my video)
-* https://www.youtube.com/watch?v=X8jsijhllIA&ab_channel=3Blue1Brown
+* <a href="https://www.youtube.com/watch?v=X8jsijhllIA&ab_channel=3Blue1Brown" target="_blank">Hamming codes, h■w to ov■rco■e n■ise.</a>
