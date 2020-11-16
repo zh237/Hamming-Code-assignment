@@ -1,7 +1,13 @@
-#import hammingCode
-from hammingCode import HammingCode
+
+import os,sys,inspect
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir) 
+
+from hammingcode.hammingCode import HammingCode
 import numpy as np
 import math
+
 
 """ 
 This file is used to show case the use of hammingCode. 
