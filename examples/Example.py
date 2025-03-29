@@ -26,7 +26,25 @@ def addErrorToCode(code, index_to_create_error):
       code[indexToChange] = 1
     return code
 
+def checkForError(received):
 
+    n = len(received)
+    r = 0
+    while (2 ** r) <= n:
+        r += 1
+
+    error_pos = 0
+
+    for i in range(r):
+        parity_pos = 2 ** i
+        parity = 0
+        for j in range(1, n + 1):
+            if j & parity_pos:
+                parity ^= received[j - 1]
+        if parity != 0:
+            error_pos += parity_pos
+
+    return error_pos  # 0 means no error
 ###  Test case 1 :
 #array = np.random.randint(0,2,20)
 
